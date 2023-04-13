@@ -4,11 +4,12 @@ import java.util.Scanner;
 class Project{
     public static void main(String[] args){
 
-        class Aluno{
-            String nome;
-            int idade;
-        }
-        ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+class Aluno{
+    String nome;
+    int idade;
+}
+
+ArrayList<Aluno> alunos = new ArrayList<Aluno>();
         
         for(int x=0; x<2; x++){   
             Aluno aluno = new Aluno();
