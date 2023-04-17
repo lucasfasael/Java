@@ -21,10 +21,8 @@ public class PetinderController {
         return petinderService.list();
     }
 
-
-
     @PostMapping
-    public void save(@RequestBody PetinderEntity petinderEntity){
+    public void save(@RequestBody PetinderEntity petinderEntity) {
         petinderService.save(petinderEntity);
     }
 }
