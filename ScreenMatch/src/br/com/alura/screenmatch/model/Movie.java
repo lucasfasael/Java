@@ -1,6 +1,8 @@
 package br.com.alura.screenmatch.model;
 
-public class Movie extends Video {
+import calculator.Classified;
+
+public class Movie extends Video implements Classified {
     private String director;
 
     public String getDirector() {
@@ -9,6 +11,11 @@ public class Movie extends Video {
 
     public void setDirector(String director) {
         this.director = director;
+    }
+
+    @Override
+    public int getClassified() {
+        return (int)showAverage() / 2;
     }
 }
 
