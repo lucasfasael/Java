@@ -4,13 +4,13 @@ import br.com.alura.screenmatch.model.Serie;
 import calculator.Calculator;
 import calculator.FilterOfRecommendation;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        Movie myMovie = new Movie();
-        Movie myMovie2 = new Movie();
+        Movie myMovie = new Movie("Spirited Away", 2003);
+        Movie myMovie2 = new Movie("O preço do amanhã", 2008);
 
-        myMovie.setName("Spirited Away");
-        myMovie.setYearOfRelease(2003);
         myMovie.setDurationMinutes(125);
 
         myMovie.rate(8);
@@ -19,9 +19,7 @@ public class Main {
         myMovie.setDirector("Hayao Miyazaki");
         System.out.println(myMovie.getDirector());
 
-        Serie superNatural = new Serie();
-        superNatural.setName("Super Natural");
-        superNatural.setYearOfRelease(2008);
+        Serie superNatural = new Serie("Super Natural", 2008);
         superNatural.setSeasons(10);
         superNatural.setEpisodesBySeason(10);
         superNatural.setMinutesPerEpisode(60);
@@ -44,5 +42,17 @@ public class Main {
 
         filter.filters(myMovie);
         filter.filters(episode);
+
+        ArrayList<Movie> listaDeFilmes = new ArrayList<>();
+        listaDeFilmes.add(myMovie);
+        listaDeFilmes.add(myMovie2);
+        System.out.println(listaDeFilmes.get(1).getName());
+        System.out.println(listaDeFilmes.size());
+
+        Movie[] cenoura = new Movie[10];
+        cenoura[0] = myMovie2;
+        System.out.println(cenoura[0].getName());
+
+        System.out.println(listaDeFilmes);
     }
 }
