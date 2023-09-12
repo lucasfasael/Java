@@ -21,6 +21,7 @@ public class MainAPI {
         System.out.println("Qual filme ? : ");
         String titulo = input.nextLine();
 
+        try{
         String endereco = "https://www.omdbapi.com/?t=" + titulo + "&apikey=e131c7a5";
 
         HttpClient client = HttpClient.newHttpClient();
@@ -37,7 +38,7 @@ public class MainAPI {
         System.out.println("Before conversion: ");
         VideoOmdb myVideoOmdb = gson.fromJson(json, VideoOmdb.class);
 
-        try{
+
             Video myVideo = new Video(myVideoOmdb);
             System.out.println(myVideoOmdb);
 
@@ -45,6 +46,8 @@ public class MainAPI {
             System.out.println(myVideo);
         } catch (NumberFormatException e){
             System.out.println("Tivemos um problema: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Digitou algo errado no endereço " + e.getMessage());
         }
 
         System.out.println("Finalizado corretamente !");
