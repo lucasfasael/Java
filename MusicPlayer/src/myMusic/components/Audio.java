@@ -1,4 +1,4 @@
-package components;
+package myMusic.components;
 
 public class Audio {
     private String title;
@@ -37,12 +37,12 @@ public class Audio {
 
     public void rate(){
         likes++;
-        System.out.println("Música curtida com sucesso: " + likes + " likes atualmente.");
+        System.out.println("Áudio curtido com sucesso: " + likes + " likes atualmente.");
     }
 
     public void play(){
         totalOfPlays++;
-        System.out.println("Música tocando (8)");
+        System.out.println("Áudio tocando (8)");
     }
 
     public int showAverage(){
