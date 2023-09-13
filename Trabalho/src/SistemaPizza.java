@@ -240,107 +240,59 @@ class DecoradorPedidoPizza implements EntradaTeclado {
     }
 }
 
+// Exemplo funcional do padrão Bridge
+
+// Interface para definir a forma de transporte
+interface Transporte {
+    void transportar();
+}
+
+// Implementação concreta da forma de transporte - Carro
+class Carro implements Transporte {
+    public void transportar() {
+        System.out.println("Transportando por Carro");
+    }
+}
+
+// Implementação concreta da forma de transporte - Barco
+class Barco implements Transporte {
+    public void transportar() {
+        System.out.println("Transportando por Barco");
+    }
+}
+
+// Abstração que usa o padrão Bridge para transportar
+abstract class Encomenda {
+    protected Transporte transporte;
+
+    public Encomenda(Transporte transporte) {
+        this.transporte = transporte;
+    }
+
+    public abstract void entregar();
+}
+
+// Implementação concreta da encomenda - Pacote
+class Pacote extends Encomenda {
+    public Pacote(Transporte transporte) {
+        super(transporte);
+    }
+
+    public void entregar() {
+        System.out.println("Pacote sendo entregue...");
+        transporte.transportar(); // Usa a implementação concreta do transporte
+    }
+}
+
 public class SistemaPizza {
     public static void main(String[] args) {
-        // O método main do programa onde a interação com o usuário ocorre e as classes e padrões são utilizados.
-        Scanner scanner = new Scanner(System.in);
+        //PADRÃO BRIDGE
+        Transporte carro = new Carro();
+        Encomenda pacoteViaCarro = new Pacote(carro);
+        pacoteViaCarro.entregar(); // Chama o método entregar, que usa a implementação do transporte via carro
 
-        System.out.println("Bem-vindo ao sistema de pedido de pizza!");
-
-        // Menu para escolher o tamanho da pizza
-        System.out.println("Escolha o tamanho da pizza:");
-        System.out.println("1. Pequena");
-        System.out.println("2. Média");
-        System.out.println("3. Grande");
-        int tamanhoEscolhido = scanner.nextInt();
-
-        TamanhoPizza tamanho;
-        switch (tamanhoEscolhido) {
-            case 1:
-                tamanho = new TamanhoPequeno();
-                break;
-            case 2:
-                tamanho = new TamanhoMedio();
-                break;
-            case 3:
-                tamanho = new TamanhoGrande();
-                break;
-            default:
-                tamanho = new TamanhoMedio(); // Opção padrão
-                break;
-        }
-
-        // Menu para escolher o sabor da pizza
-        System.out.println("Escolha o sabor da pizza:");
-        System.out.println("1. Margherita");
-        System.out.println("2. Pepperoni");
-        System.out.println("3. Calabresa"); // Novo sabor adicionado
-        System.out.println("4. Frango Catupiry"); // Novo sabor adicionado
-        System.out.println("5. Quatro Queijos"); // Novo sabor adicionado
-        int saborEscolhido = scanner.nextInt();
-
-        SaborPizza sabor;
-        switch (saborEscolhido) {
-            case 1:
-                sabor = new SaborMargherita();
-                break;
-            case 2:
-                sabor = new SaborPepperoni();
-                break;
-            case 3:
-                sabor = new SaborCalabresa(); // Utiliza o novo sabor Calabresa
-                break;
-            case 4:
-                sabor = new SaborFrangoCatupiry(); // Utiliza o novo sabor Frango Catupiry
-                break;
-            case 5:
-                sabor = new SaborQuatroQueijos(); // Utiliza o novo sabor Quatro Queijos
-                break;
-            default:
-                sabor = new SaborMargherita(); // Opção padrão
-                break;
-        }
-
-        // Menu para escolher a forma de pagamento
-        System.out.println("Escolha a forma de pagamento:");
-        System.out.println("1. Cartão de Crédito");
-        System.out.println("2. Cartão de Débito");
-        System.out.println("3. Dinheiro");
-        System.out.println("4. Pix");
-        int pagamentoEscolhido = scanner.nextInt();
-
-        PagamentoPizza pagamento;
-        switch (pagamentoEscolhido) {
-            case 1:
-                pagamento = new PagamentoCartaoCredito();
-                break;
-            case 2:
-                pagamento = new PagamentoCartaoDebito();
-                break;
-            case 3:
-                pagamento = new PagamentoDinheiro();
-                break;
-            case 4:
-                pagamento = new PagamentoPix();
-                break;
-            default:
-                pagamento = new PagamentoDinheiro(); // Opção padrão
-                break;
-        }
-
-        PedidoPizza pedido = new PedidoPizza(tamanho, sabor, pagamento);
-
-        // Processamento do pedido com decorador para entrada de teclado
-        EntradaTeclado entradaTeclado = new EntradaTecladoBasica();
-        DecoradorPedidoPizza decoradorPedido = new DecoradorPedidoPizza(pedido, entradaTeclado);
-
-        System.out.println("Digite os detalhes adicionais do seu pedido abaixo:");
-
-        String detalhesPedido = decoradorPedido.lerEntrada();
-        String[] detalhes = detalhesPedido.split(" - Pedido: "); // Divide em tamanho, sabor e pagamento
-        String tamanhoPizza = detalhes[0];
-        String outrosDetalhes = detalhes[1];
-
-        System.out.println(tamanhoPizza + outrosDetalhes);
+        Transporte barco = new Barco();
+        Encomenda pacoteViaBarco = new Pacote(barco);
+        pacoteViaBarco.entregar(); // Chama o método entregar, que usa a implementação do transporte via barco
     }
 }
