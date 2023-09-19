@@ -1,0 +1,18 @@
+[
+  {
+    "cep": "72890-021",
+    "logradouro": "Quadra 8",
+    "complemento": "",
+    "bairro": "Residencial Villa Suiça",
+    "localidade": "Cidade Ocidental",
+    "ddd": "61"
+  },
+  {
+    "cep": "49048-010",
+    "logradouro": "Avenida Adélia Franco",
+    "complemento": "até 9998 - lado par",
+    "bairro": "Luzia",
+    "localidade": "Aracaju",
+    "ddd": "79"
+  }
+]

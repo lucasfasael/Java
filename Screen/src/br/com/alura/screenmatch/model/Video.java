@@ -2,6 +2,7 @@ package br.com.alura.screenmatch.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.sun.jdi.IntegerValue;
+import main.MyYearError;
 
 public class Video implements Comparable<Video>{
     @SerializedName("Title")
@@ -20,6 +21,10 @@ public class Video implements Comparable<Video>{
 
     public Video(VideoOmdb myVideoOmdb) {
         this.name = myVideoOmdb.title();
+
+        if(myVideoOmdb.year().length() > 4){
+            throw new MyYearError("O ano é inválido pois é maior que 4.");
+        }
         this.yearOfRelease = Integer.valueOf(myVideoOmdb.year());
         this.durationMinutes = Integer.valueOf(myVideoOmdb.runtime().substring(0, 2));
     }
