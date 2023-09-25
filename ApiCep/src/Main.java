@@ -16,7 +16,6 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner input = new Scanner(System.in);
         String cep = "";
-        int cepValid = 0;
         List<Cep> ceps = new ArrayList<>();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -28,12 +27,13 @@ public class Main {
                     System.out.println("Saindo !");
                     break;
                 }
-                cepValid = Integer.parseInt(cep);
-                System.out.println("CEP DIGITADO: " + cepValid);
+
+                System.out.println("CEP DIGITADO: " + cep);
                 String adress = "https://viacep.com.br/ws/" + cep.replace("-", "") + "/json/";
 
                 HttpClient client = HttpClient.newHttpClient();
-                HttpRequest request = HttpRequest.newBuilder()
+                HttpRequest request = HttpRequest
+                        .newBuilder()
                         .uri(URI.create(adress))
                         .build();
 
@@ -49,8 +49,8 @@ public class Main {
                 System.out.println(myCep);
                 ceps.add(myCep);
 
-            } catch (NumberFormatException e) {
-                System.out.println("O cep digitado não é um número !");
+            } catch (Exception e) {
+                System.out.println("O cep digitado não existe !");
             }
         }
         FileWriter fileWriter = new FileWriter("search.json");
